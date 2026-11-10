@@ -1,0 +1,23 @@
+
+name: Download Windscribe
+
+on:
+  workflow_dispatch:
+
+jobs:
+  download:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Download
+        run: |
+          mkdir downloads
+          curl -L --fail \
+            "https://deploy.totallyacdn.com/desktop-apps/2.24.13/Windscribe_2.24.13_amd64.exe" \
+            -o downloads/Windscribe.exe
+
+      - name: Upload
+        uses: actions/upload-artifact@v4
+        with:
+          name: Windscribe-Download
+          path: downloads/Windscribe.exe
+          retention-days: 7
